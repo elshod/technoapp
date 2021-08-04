@@ -1,28 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="menu">
+      <router-link v-for='(menu,index) of menus' :key='index' :to='menu.link' exact active-class="active">
+        {{menu.title}}
+      </router-link>
+    </div>
+    <router-view></router-view>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      menus: [
+        { title: 'Home', link: '/' },
+        { title: 'Category', link: '/category' },
+        { title: 'Devices', link: '/devices' },
+      ]
+    }
+  },
 }
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .menu {
+    display: flex;
+    justify-content: center;
+  }
+  .menu a {
+    margin: 0px 10px;
+    text-decoration: none;
+    color: #000;
+  }
+  .menu a.active {
+    text-decoration: underline;
+  }
 </style>
